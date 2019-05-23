@@ -6,9 +6,20 @@
 // Find the html element that contains "USA".
 // Print that element's contents.
 
+console.log(document.childNodes);
+
+function getUSA() {
+
+    const flat = document.querySelectorAll('*');
+    const arr = [...flat];
+    return arr.find(x => x.innerText == 'USA').textContent;
+}
+
 // 2. Sales
 // Define function getPeopleInSales()
 // Print the names of all the people in the sales department.
+
+
 
 // 3. Click Here
 // Define function getAnchorChildren()
@@ -75,3 +86,9 @@
 // Define function walkTheDOM(node, func)
 // This function should traverse every node in the DOM. Use recursion.
 // On each node, call func(node).
+
+function walkTheDOM(node, func) {
+
+    func(node);
+    node.childNodes.map(n => walkTheDOM(n, func));
+}
