@@ -19,7 +19,14 @@ function getUSA() {
 // Define function getPeopleInSales()
 // Print the names of all the people in the sales department.
 
+function getPeopleInSales() {
 
+    const emps = document.querySelectorAll('.empName');
+    const parents = [...emps].map(x => x.parentNode);
+    const matches = parents.map(x => x.innerText.match('.*Sales'));
+    const sales = matches.filter(x => x != null);
+    sales.map(x => console.log(x[0].split(/\s/)[0]));
+}
 
 // 3. Click Here
 // Define function getAnchorChildren()
