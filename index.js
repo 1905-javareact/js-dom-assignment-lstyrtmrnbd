@@ -1,6 +1,11 @@
 // Use the provided index.html
 // -----------------------------------------------------------------------------------
 
+function notNull(x) {
+
+    return x != null;
+}
+
 // 1. USA
 // Define function getUSA()
 // Find the html element that contains "USA".
@@ -11,8 +16,7 @@ console.log(document.childNodes);
 function getUSA() {
 
     const flat = document.querySelectorAll('*');
-    const arr = [...flat];
-    return arr.find(x => x.innerText == 'USA').textContent;
+    return [...flat].find(x => x.innerText === 'USA').textContent;
 }
 
 // 2. Sales
@@ -22,9 +26,8 @@ function getUSA() {
 function getPeopleInSales() {
 
     const emps = document.querySelectorAll('.empName');
-    const parents = [...emps].map(x => x.parentNode);
-    const matches = parents.map(x => x.innerText.match('.*Sales'));
-    const sales = matches.filter(x => x != null);
+    const parents = [...emps].map(x => x.parentNode.innerText.match('.*Sales'));
+    const sales = parents.filter(notNull);
     sales.map(x => console.log(x[0].split(/\s/)[0]));
 }
 
@@ -33,10 +36,24 @@ function getPeopleInSales() {
 // Find all anchor elements with a <span> child.
 // Print the contents of <span>
 
+function getAnchorChildren() {
+
+    const anchorkids = [...document.querySelectorAll('a')].map(x => x.childNodes);
+    const spans = anchorkids.map(x => [...x].find(y => y.localName === 'span')).filter(notNull);
+    spans.map(x => console.log(x.innerText));
+}
+
 // 4. Hobbies
 // Define function getHobbies()
 // Find all checked options in the 'skills' select element.
 // Print the value and the contents.
+
+function getHobbies() {
+
+    const skills = [...document.querySelectorAll('select')].filter(x => x.name === 'skills')[0];
+    const opts = [...skills.childNodes].filter(x => x.localName === 'option');
+    opts.map(x => console.log(x.value + ' ' + x.textContent));
+}
 
 // 5. Custom Attribute
 // Define function getCustomAttribute()
@@ -97,5 +114,5 @@ function getPeopleInSales() {
 function walkTheDOM(node, func) {
 
     func(node);
-    node.childNodes.map(n => walkTheDOM(n, func));
+    [...node.childNodes].map(n => walkTheDOM(n, func));
 }
