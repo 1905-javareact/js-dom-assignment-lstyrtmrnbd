@@ -68,6 +68,7 @@ function getCustomAttribute() {
 
     const elts = [...document.querySelectorAll('[data-customAttr]')];
     const attrs = elts.map(e => e.attributes.getNamedItem('data-customattr'));
+
     attrs.map( (a, i) => {
 	console.log(a.value + ' ' + elts[i].localName);
     });
@@ -79,11 +80,38 @@ function getCustomAttribute() {
 // 	<input id="num1" class="nums" type="text"/>
 // 	<input id="num2" class="nums" type="text"/>
 // 	<h3>Sum: <span id="sum"></span></h3>  
-
 // Define onchange event handler.
 // Add <input> element values.
 // Put the sum in the <span> element.
 // If values cannot be added, put "Cannot add" in the <span> element
+
+(function installHooks() {
+
+    const nums = document.querySelectorAll('.nums');
+    const span = document.querySelector('#sum');
+
+    for(let n of nums) {
+	
+	n.addEventListener('change', (e) => {
+	    span.textContent = sumText();
+	});
+    }
+})();
+
+function sumText() {
+
+    const result = getSum();
+    return isNaN(result) ? 'Cannot add' : result;
+}
+
+// returns NaN if not summable
+function getSum() {
+
+    const nums = [...document.querySelectorAll('.nums')];
+    const vals = nums.map( n => parseInt(n.value) );
+    return vals.reduce( (a,b) => a + b );
+}
+
 // 7. Skills Event
 // NOTE: Write unobtrusive Javascript
 // When user selects a skill, create an alert with a message similar to:
@@ -98,6 +126,7 @@ function getCustomAttribute() {
 // 	"So you like green more than blue now?"
 // In this example, green is the new value and blue is the old value.
 // Make the background color (of all favoriteColor radio buttons) the newly selected favoriteColor
+
 
 // 9. Show/Hide Event
 // NOTE: Write unobtrusive Javascript
@@ -117,6 +146,7 @@ function getCustomAttribute() {
 // Regarding this element:
 // 	<p id="helloWorld">Hello, World!</p>
 // Three seconds after a user clicks on this element, change the text to a random color.
+
 
 // 12. Walk the DOM
 // Define function walkTheDOM(node, func)
