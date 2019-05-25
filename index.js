@@ -85,7 +85,7 @@ function getCustomAttribute() {
 // Put the sum in the <span> element.
 // If values cannot be added, put "Cannot add" in the <span> element
 
-(function installHooks() {
+(function installSumHooks() {
 
     const nums = document.querySelectorAll('.nums');
     const span = document.querySelector('#sum');
@@ -118,6 +118,16 @@ function getSum() {
 // 	"Are you sure CSS is one of your skills?"
 // NOTE: no alert should appear when user deselects a skill.
 
+(function installSkillHook() {
+
+    const select = document.querySelector('[name=skills]');
+
+    select.addEventListener('change', (e) => {
+
+	const text = select.querySelector(`[value=${e.target.value}]`).innerText;
+	alert(`Are you sure ${text} is one of your skills?`);
+    });
+})();
 
 // 8. Favorite Color Event
 // NOTE: Write unobtrusive Javascript
@@ -127,6 +137,22 @@ function getSum() {
 // In this example, green is the new value and blue is the old value.
 // Make the background color (of all favoriteColor radio buttons) the newly selected favoriteColor
 
+(function installFavoriteColorHooks() {
+
+    const btns = document.querySelectorAll('[name=favoriteColor]');
+    let oldColor = 'white';
+
+    for(let b of btns) {
+
+	b.addEventListener('change', (e) => {
+
+	    const newColor = e.target.value;
+	    alert(`So you like ${newColor} more than ${oldColor} now?`);
+	    oldColor = newColor;
+	    btns.forEach(b => b.style.backgroundColor = newColor);
+	});
+    }
+})();
 
 // 9. Show/Hide Event
 // NOTE: Write unobtrusive Javascript
