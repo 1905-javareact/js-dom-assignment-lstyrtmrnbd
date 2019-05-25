@@ -26,9 +26,10 @@ function getUSA() {
 function getPeopleInSales() {
 
     const emps = document.querySelectorAll('.empName');
-    const parents = [...emps].map(x => x.parentNode.innerText.match('.*Sales'));
+    const parents = [...emps].map(e => e.parentNode.innerText.match('.*Sales'));
     const sales = parents.filter(notNull);
-    sales.map(x => console.log(x[0].split(/\s/)[0]));
+
+    sales.map(s => console.log(s[0].split(/\s/)[0]));
 }
 
 // 3. Click Here
@@ -40,6 +41,7 @@ function getAnchorChildren() {
 
     const anchorkids = [...document.querySelectorAll('a')].map(x => x.childNodes);
     const spans = anchorkids.map(x => [...x].find(y => y.localName === 'span')).filter(notNull);
+
     spans.map(x => console.log(x.innerText));
 }
 
@@ -51,8 +53,9 @@ function getAnchorChildren() {
 function getHobbies() {
 
     const skills = [...document.querySelectorAll('select')].filter(x => x.name === 'skills')[0];
-    const opts = [...skills.childNodes].filter(x => x.localName === 'option');
-    opts.map(x => console.log(x.value + ' ' + x.textContent));
+    const opts = [...skills.childNodes].filter(s => s.localName === 'option');
+
+    opts.map(o => console.log(o.value + ' ' + o.textContent));
 }
 
 // 5. Custom Attribute
@@ -60,6 +63,15 @@ function getHobbies() {
 // Find all elements with "data-customAttr" attribute
 // Print the value of the attribute.
 // Print the element that has the attribute. 
+
+function getCustomAttribute() {
+
+    const elts = [...document.querySelectorAll('[data-customAttr]')];
+    const attrs = elts.map(e => e.attributes.getNamedItem('data-customattr'));
+    attrs.map( (a, i) => {
+	console.log(a.value + ' ' + elts[i].localName);
+    });
+}
 
 // 6. Sum Event
 // NOTE: Write unobtrusive Javascript
