@@ -1,8 +1,9 @@
 // Use the provided index.html
 // -----------------------------------------------------------------------------------
 
-function notNull(x) {
+console.log(document.childNodes);
 
+function notNull(x) {
     return x != null;
 }
 
@@ -10,8 +11,6 @@ function notNull(x) {
 // Define function getUSA()
 // Find the html element that contains "USA".
 // Print that element's contents.
-
-console.log(document.childNodes);
 
 function getUSA() {
 
@@ -160,6 +159,21 @@ function getSum() {
 // 	Hide the name if shown.
 // 	Show the name if hidden.
 
+(function installShowHideHooks() {
+
+    const emps = document.getElementsByClassName('empName');
+
+    for(let elt of emps) {
+
+	let show = true;
+	elt.addEventListener('mouseover', (e) => {
+
+	    show = !show;
+	    const style = e.target.style;
+	    show ? style.opacity = 1 : style.opacity = 0;
+	});
+    }
+})();
 
 // 10. Current Time
 // Regarding this element:
