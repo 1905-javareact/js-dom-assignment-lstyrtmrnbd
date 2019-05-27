@@ -200,6 +200,28 @@ function getSum() {
 // 	<p id="helloWorld">Hello, World!</p>
 // Three seconds after a user clicks on this element, change the text to a random color.
 
+function getRandomInt(max) {
+
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+(function installHelloWorldHooks() {
+
+    const hw = document.getElementById('helloWorld');
+
+    hw.addEventListener('click', (e) => {
+
+	window.setTimeout(changeColor, 3000);
+    });
+
+    function changeColor() {
+
+	const r = getRandomInt(256);
+	const g = getRandomInt(256);
+	const b = getRandomInt(256);
+	hw.style.color = `rgb(${r},${g},${b})`;
+    }
+})();
 
 // 12. Walk the DOM
 // Define function walkTheDOM(node, func)
