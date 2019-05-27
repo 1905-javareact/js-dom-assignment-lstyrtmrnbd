@@ -181,6 +181,19 @@ function getSum() {
 // Show the current time in this element in this format: 9:05:23 AM
 // The time should be accurate to the second without having to reload the page.
 
+(function repeatDate() {
+
+    const timeElt = document.getElementById('currentTime');
+    
+    function updateDate() {
+
+	const d = new Date();
+	const s = d.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+	timeElt.innerText = s;
+    }
+
+    window.setInterval(updateDate, 1000);
+})();
 
 // 11. Delay
 // Regarding this element:
