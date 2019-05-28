@@ -1,8 +1,6 @@
 // Use the provided index.html
 // -----------------------------------------------------------------------------------
 
-console.log(document.childNodes);
-
 function notNull(x) {
     return x != null;
 }
@@ -54,7 +52,10 @@ function getHobbies() {
     const skills = [...document.querySelectorAll('select')].filter(x => x.name === 'skills')[0];
     const opts = [...skills.childNodes].filter(s => s.localName === 'option');
 
-    opts.map(o => console.log(o.value + ' ' + o.textContent));
+    opts.map((o) => {
+	if(o.selected)
+	    console.log(o.value + ' ' + o.textContent);
+    });
 }
 
 // 5. Custom Attribute
